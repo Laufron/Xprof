@@ -4,7 +4,7 @@
 
     {% load static %}
 
-   <title>{% block title %}Mon blog sur les crêpes bretonnes{% endblock %}</title>
+   <title>{% block title %}X-Prof{% endblock %}</title>
     <!-- Bootstrap library -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- jQuery library -->
@@ -17,14 +17,16 @@
     <!-- Font Awesome 5 support (found here: https://www.w3schools.com/icons/fontawesome5_intro.asp) -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link href='/stylesheets/style.css' rel='stylesheet' type='text/css'/>
 
     <link rel="stylesheet" href="{% static '../static/css/style.css' %}" />
 
 </head>
 <body>
-<h id="app_title">Crepes bretonnes</h>
+<h id="app_title">X-Prof</h>
 <hr>
+
+{% block menu %}
+
 <p class="subtitle">Bienvenue #inserer nom#</p> <br>
 
 <div class="collapse-block">
@@ -33,17 +35,22 @@
     </button>
     <div id="collapseMenu" class="collapse collapse-menu-bg" aria-labelledby="Menu">
         <a class="btn2" href="admin/"><i class="fas fa-user"></i>Admin</a>
-        <a class="btn2" href="{% url "store" %}"><i class="fas fa-user"></i> Magasin</a>
     </div>
 </div>
 
+{% endblock %}
+
+{% block breadcrumb %}
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        {% block breadcrumb %}
+        {% block breadcrumb_content %}
         <li class="breadcrumb-item active" aria-current="page">Home</li>
         {% endblock %}
     </ol>
 </nav>
+
+{% endblock %}
 
 {% block content %}
 {% endblock %}

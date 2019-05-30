@@ -19,13 +19,13 @@ body {
 
 #err {
   color: red;
+  padding:2px;
   font-size: large;
 }
 
 h1, h2, h3, h4, h5{
   color: #00557c;
   padding:16px;
-  border-bottom: 3px solid #9c9c9c;
 }
 
 a {

@@ -3,25 +3,38 @@ from django.db import models
 # Create your models here.
 
 
-class User(models.Model):
+class Teacher(models.Model):
     firstname = models.CharField(max_length=100, default='')
     name = models.CharField(max_length=100, default='')
-    login = models.CharField(max_length=100, default='login')
-    password = models.CharField(max_length=50, default='azerty')
-    status = models.CharField(max_length=50, choices=[("T", "teacher"), ("S", "student")], default="T")
+    login = models.CharField(max_length=100, default='', unique=True)
+    password = models.CharField(max_length=50, default='')
 
     def __str__(self):
-        return "".join(self.firstname).join(" ").join(self.name)
+        return self.firstname+" "+self.name
 
     class Meta:
-        verbose_name = "Teacher/Student"
+        verbose_name = "Teacher"
+        ordering = ['name']
+
+
+class Student(models.Model):
+    firstname = models.CharField(max_length=100, default='')
+    name = models.CharField(max_length=100, default='')
+    login = models.CharField(max_length=100, default='', unique=True)
+    password = models.CharField(max_length=50, default='')
+
+    def __str__(self):
+        return self.firstname+" "+self.name
+
+    class Meta:
+        verbose_name = "Student"
         ordering = ['name']
 
 
 class Course(models.Model):
     name = models.CharField(max_length=100, default='')
-    professors = models.ManyToManyField(User, related_name='courses_given', blank=True)
-    students = models.ManyToManyField(User, related_name='courses_followed', blank=True)
+    professors = models.ManyToManyField(Teacher, related_name='courses_given', blank=True)
+    students = models.ManyToManyField(Student, related_name='courses_followed', blank=True)
 
     def __str__(self):
         return self.name
@@ -60,7 +73,7 @@ class Evaluation(models.Model):
     mark = models.IntegerField()
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
-    concerned = models.ForeignKey(User, on_delete=models.CASCADE)
+    concerned = models.ForeignKey(Student, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.session.course.name+"_"+self.skill.name+"_"+self.session.date.__str__()

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block menu %}
+{% endblock %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}
+
+    <h1>CAS</h1>
+    <h2>Central Authentification Service</h2>
+    <hr>
+
+    {% if auth_error %}<p id="err">Invalid credentials</p>{% endif %}
+
+
+    <form action="{% url "authentication" %}" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="btn btn-success" value="Submit" />
+    </form>
+
+    <h5>Pas encore de compte ?
+    <a class="btn btn-link" href="/newUser"><i class="fas fa-user-plus"></i>&emsp;S'enregistrer</a>
+    </h5>
+
+{% endblock %}
