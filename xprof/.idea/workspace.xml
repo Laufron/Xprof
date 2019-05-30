@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0bccb59f-dffb-4b44-919c-32eaa6bdbdf3" name="Default Changelist" comment="" />
+    <list default="true" id="3ad9bee6-5840-4b97-8b02-5cf7c3684edb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/xprof/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/xprof/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xprof/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/xprof/urls.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,30 +19,63 @@
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+        <entry file="file://$PROJECT_DIR$/xprof/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+            <state relative-caret-position="360">
+              <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xprof/manage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/css/style.css">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/xprof/xprof/settings.py">
+        <entry file="file://$PROJECT_DIR$/teacher_access/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="45" column="30" lean-forward="true" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
+            <state relative-caret-position="45">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/teacher_access/__init__.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/teacher_access/apps.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/teacher_access/models.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/teacher_access/views.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/xprof/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+              <folding>
+                <element signature="e#630#662#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -43,7 +83,15 @@
     </leaf>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/xprof/urls.py" />
+        <option value="$PROJECT_DIR$/xprof/settings.py" />
+      </list>
+    </option>
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -51,10 +99,17 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="677" />
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="541" />
     <option name="y" value="27" />
-    <option name="width" value="774" />
+    <option name="width" value="802" />
     <option name="height" value="737" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -63,43 +118,38 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="Xprof" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Xprof" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Xprof" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Xprof" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Xprof" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Xprof" type="462c0819:PsiDirectoryNode" />
+              <item name="xprof" type="b2602c69:ProjectViewProjectNode" />
               <item name="xprof" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Xprof" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Xprof" type="462c0819:PsiDirectoryNode" />
+              <item name="xprof" type="b2602c69:ProjectViewProjectNode" />
               <item name="xprof" type="462c0819:PsiDirectoryNode" />
-              <item name="xprof" type="462c0819:PsiDirectoryNode" />
+              <item name="teacher_access" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xprof" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/xprof" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/css" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -114,14 +164,14 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Xprof" type="Python.DjangoServer" factoryName="Django server">
-      <module name="Xprof" />
+    <configuration name="xprof" type="Python.DjangoServer" factoryName="Django server">
+      <module name="xprof" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="/usr/bin/python3.7" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -143,23 +193,24 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0bccb59f-dffb-4b44-919c-32eaa6bdbdf3" name="Default Changelist" comment="" />
-      <created>1559225928319</created>
+      <changelist id="3ad9bee6-5840-4b97-8b02-5cf7c3684edb" name="Default Changelist" comment="" />
+      <created>1559227392950</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1559225928319</updated>
-      <workItem from="1559225943945" duration="344000" />
-      <workItem from="1559226293164" duration="1100000" />
+      <updated>1559227392950</updated>
+      <workItem from="1559227394291" duration="476000" />
+      <workItem from="1559227890377" duration="1943000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1444000" />
+    <option name="totallyTimeSpent" value="2419000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="677" y="27" width="774" height="737" extended-state="0" />
+    <frame x="67" y="25" width="1299" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.43681318" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25059855" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -172,7 +223,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32401314" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -188,26 +239,45 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Xprof/urls.py" />
-    <entry file="file://$PROJECT_DIR$/Xprof/settings.py" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/xprof/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="4" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+        <state relative-caret-position="300">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#630#662#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xprof/manage.py">
+    <entry file="file://$PROJECT_DIR$/xprof/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+        <state relative-caret-position="360">
+          <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/xprof/xprof/settings.py">
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teacher_access/models.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teacher_access/views.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teacher_access/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teacher_access/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/teacher_access/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="30" lean-forward="true" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
+        <state relative-caret-position="45">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>

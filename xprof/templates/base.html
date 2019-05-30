@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+    {% load static %}
+
+   <title>{% block title %}Mon blog sur les crêpes bretonnes{% endblock %}</title>
+    <!-- Bootstrap library -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Font Awesome 5 support (found here: https://www.w3schools.com/icons/fontawesome5_intro.asp) -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href='/stylesheets/style.css' rel='stylesheet' type='text/css'/>
+
+    <link rel="stylesheet" href="{% static '../static/css/style.css' %}" />
+
+</head>
+<body>
+<h id="app_title">Crepes bretonnes</h>
+<hr>
+<p class="subtitle">Bienvenue #inserer nom#</p> <br>
+
+<div class="collapse-block">
+    <button class="btn-lg btn-secondary" data-toggle="collapse" data-target="#collapseMenu" aria-expanded="true" aria-controls="collapseMenu">
+        Menu&emsp;<i class="fas fa-caret-down"></i>
+    </button>
+    <div id="collapseMenu" class="collapse collapse-menu-bg" aria-labelledby="Menu">
+        <a class="btn2" href="admin/"><i class="fas fa-user"></i>Admin</a>
+        <a class="btn2" href="{% url "store" %}"><i class="fas fa-user"></i> Magasin</a>
+    </div>
+</div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        {% block breadcrumb %}
+        <li class="breadcrumb-item active" aria-current="page">Home</li>
+        {% endblock %}
+    </ol>
+</nav>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
