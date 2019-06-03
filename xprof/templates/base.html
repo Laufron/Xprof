@@ -23,18 +23,20 @@
 </head>
 <body>
 <h id="app_title">X-Prof</h>
+<a class="btn2" href="http://localhost:8000/admin/" title="Manage your database" style="float:right;"><i class="fas fa-user-cog"></i> Admin</a>
+
 <hr>
 
 {% block menu %}
 
-<p class="subtitle">Bienvenue #inserer nom#</p> <br>
+<p class="subtitle">Welcome {{ firstname }} {{ name }}</p> <br>
 
 <div class="collapse-block">
     <button class="btn-lg btn-secondary" data-toggle="collapse" data-target="#collapseMenu" aria-expanded="true" aria-controls="collapseMenu">
         Menu&emsp;<i class="fas fa-caret-down"></i>
     </button>
     <div id="collapseMenu" class="collapse collapse-menu-bg" aria-labelledby="Menu">
-        <a class="btn2" href="admin/"><i class="fas fa-user"></i>Admin</a>
+        <a class="btn2" href="http://localhost:8000/admin/"><i class="fas fa-user"></i>Admin</a>
     </div>
 </div>
 

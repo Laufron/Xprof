@@ -20,7 +20,13 @@ def log_page(request):
         if not auth_check.exists():
             auth_error = True
         else:
-            return render(request, 'base.html', {})
+            request.session['firstname'] = auth_check[0].firstname
+            request.session['name'] = auth_check[0].name
+            return redirect('home')
 
-    print(locals())
     return render(request, 'teacher_access/auth_page.html', locals())
+
+
+def home_page(request):
+    print(request.session["name"])
+    return render(request, 'base.html', {"firstname": request.session['firstname'], "name": request.session['name']})
