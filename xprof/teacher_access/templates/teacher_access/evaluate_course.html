@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block welcome %}
+{% endblock %}
+
+{% block breadcrumb_content %}
+     <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+     <li class="breadcrumb-item active" aria-current="page">Evaluate</li>
+{% endblock %}
+
+{% block content %}
+
+   <br>
+   <form action="{% url 'evaluate_course' course_slug %}" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+       <div style="text-align: center;">
+           <input type="submit" class="btn btn-success" value="Save evaluation" />
+       </div>
+   </form>
+
+{% endblock %}

@@ -67,7 +67,7 @@ class SessionAdmin(admin.ModelAdmin):
 
 
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('name', )
+    list_display = ('name', 'slug')
     list_filter = ('professors',)
     ordering = ('name', )
     search_fields = ('name', )
@@ -76,7 +76,7 @@ class CourseAdmin(admin.ModelAdmin):
         # Fieldset 1 : meta-info (titre, auteur…)
         ('General informations', {
             'classes': ['collapse', ],
-            'fields': ('name', 'professors')
+            'fields': ('name', 'professors', 'slug')
         }),
         # Fieldset 2 : subsidiaires
         ('List of students', {
@@ -84,10 +84,12 @@ class CourseAdmin(admin.ModelAdmin):
         }),
     )
 
+    prepopulated_fields = {'slug': ('name',), }
+
 
 class EvaluationAdmin(admin.ModelAdmin):
-    list_display = ('concerned', 'skill', 'mark', 'session')
-    list_filter = ('skill', 'session')
+    list_display = ('concerned', 'skill', 'mark', 'session', 'teacher')
+    list_filter = ('skill', 'session', 'teacher')
     ordering = ('concerned', 'skill', 'mark', 'session')
     search_fields = ('concerned', )
 
@@ -95,7 +97,7 @@ class EvaluationAdmin(admin.ModelAdmin):
         # Fieldset 1 : meta-info (titre, auteur…)
         ("Contenu de l'évaluation", {
             'classes': ["collapse", ],
-            'fields': ('skill', 'session', 'concerned', 'mark')
+            'fields': ('skill', 'session', 'concerned', 'mark', 'teacher')
         }),
 
     )

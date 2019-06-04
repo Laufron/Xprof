@@ -31,14 +31,18 @@
 
 {% block menu %}
 
+    {% block welcome %}
+
 <p class="subtitle">Welcome {{ firstname }} {{ name }}</p> <br>
+
+    {% endblock %}
 
 <div class="collapse-block">
     <button class="btn-lg btn-secondary" data-toggle="collapse" data-target="#collapseMenu" aria-expanded="true" aria-controls="collapseMenu">
         Menu&emsp;<i class="fas fa-caret-down"></i>
     </button>
     <div id="collapseMenu" class="collapse collapse-menu-bg" aria-labelledby="Menu">
-
+         <a class="btn2" href="{% url 'evaluate' %}"><i class="fas fa-book-open"></i> Evaluate</a>
     </div>
 </div>
 

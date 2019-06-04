@@ -58,5 +58,30 @@ def log_out(request):
 
 
 def home_page(request):
-    return render(request, 'base.html', {"firstname": request.session['firstname'], "name": request.session['name']})
+    return render(request, 'teacher_access/home.html', {"firstname": request.session['firstname'], "name": request.session['name']})
 
+
+def evaluate(request):
+    form = EvaluationForm(request.POST or None, session=request.session)
+    if form.is_valid():
+        course = form.cleaned_data['course']
+        return redirect('evaluate_course', course_slug=course.slug)
+
+    return render(request, 'teacher_access/evaluation.html', locals())
+
+
+def evaluate_course(request, course_slug):
+
+    form = EvaluateCourseForm(request.POST or None, slug=course_slug)
+    if form.is_valid():
+        teacher = Teacher.objects.get(name=request.session['name'], firstname=request.session['firstname'])
+        session = form.cleaned_data['session']
+        concerned = form.cleaned_data['concerned']
+        skill = form.cleaned_data['skill']
+        mark = form.cleaned_data['mark']
+
+        Evaluation.objects.create(session=session, concerned=concerned, skill=skill, mark=mark, teacher=teacher)
+
+        return redirect('home')
+
+    return render(request, 'teacher_access/evaluate_course.html', locals())
