@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block logout %}
+{% endblock %}
+
+{% block menu %}
+{% endblock %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}
+
+    <h1>CAS</h1>
+    <h2>Central Authentification Service</h2>
+    <hr>
+    <h3 style="color:darkslategrey">Create your teacher Account</h3>
+
+    <form action="{% url "register" %}" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="btn btn-success" value="Register" />
+        <a class="btn btn-info" href="{% url "authentication" %}"><i class="fas fa-undo-alt"></i> Back to auth page</a>
+    </form>
+
+{% endblock %}

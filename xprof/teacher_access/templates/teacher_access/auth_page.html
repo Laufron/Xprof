@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
+{% block logout %}
+{% endblock %}
+
 {% block menu %}
 {% endblock %}
 
@@ -22,8 +25,8 @@
         <input type="submit" class="btn btn-success" value="Submit" />
     </form>
 
-    <h5>Pas encore de compte ?
-    <a class="btn btn-link" href="/newUser"><i class="fas fa-user-plus"></i>&emsp;S'enregistrer</a>
+    <h5>New on Xprof ?
+    <a class="btn btn-link" href="{% url "register" %}"><i class="fas fa-user-plus"></i> Register</a>
     </h5>
 
 {% endblock %}

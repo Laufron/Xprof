@@ -19,10 +19,13 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import path, re_path
 
+from teacher_access.views import check_log
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('teacher/', include('teacher_access.urls'))
+    path('teacher/', include('teacher_access.urls')),
+    re_path(r'^', check_log)
 
 ]
 
