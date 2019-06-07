@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block welcome %}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'courses' %}">My courses</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ course_name }}</li>
+{% endblock %}
+
+
+{% block content %}
+
+    <h2> {{ course_name|title }}</h2>
+    <br>
+    {% if skills_list|length == 0 %}
+        <h6>No skills evaluated in this course</h6>
+    {% endif %}
+    <a class="btn btn-link" href="{% url 'new_skill' course_slug %}"><i class="fas fa-plus"></i>&emsp;Add a new skill</a>
+
+    {% if skills_list|length != 0 %}
+    <table class="table">
+    <br><br>
+    <tr>
+        <th style="width:25%;">Skills</th>
+        <th>Description</th>
+        <th style="text-align: center;">Evaluated x times</th>
+        <th></th>
+    </tr>
+    {% for skill in skills_list %}
+        <tr>
+            <td><a class="btn3" href="{% url 'skill' course_slug skill.slug %}">{{ skill.name }}</a></td>
+            <td>
+                <div class="form-inline" style="margin-top: 15px;">
+                    <p>{{ skill.description|truncatechars:80 }}</p>
+                </div>
+            </td>
+            <td>
+                <div style="margin-top: 12px; text-align:center;">
+                    <b style="padding:6px;border: solid  #3333ff 1px; border-radius: 5px; "> {{ skill.number_eval }} </b>
+                </div>
+            </td>
+            <td style="text-align: center;">
+                <div class="btn-group" role="group">
+                    <a class="btn btn-primary btn-edit" href="{% url 'edit_skill' course_slug skill.slug %}" alt="Edit skill" style="margin-top: 3px;"><i class="fas fa-edit"></i>&emsp;Edit</a>
+                    <a class="btn btn-danger" href="{% url 'delete_skill' course_slug skill.slug %}" alt="Delete skill" style="margin-top: 3px;"><i class="fas fa-trash-alt"></i> Delete</a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% endif %}
+
+    <br><br>
+    {% if sessions_list|length == 0 %}
+        <h6>No sessions planned for this course</h6>
+    {% endif %}
+    <a class="btn btn-link" href="{% url 'new_session' course_slug %}"><i class="fas fa-plus"></i>&emsp;Add a new session</a>
+
+     {% if sessions_list|length != 0 %}
+    <table class="table">
+    <br><br>
+    <tr>
+        <th style="width:50%;">Sessions</th>
+        <th style="text-align: center;">Evaluations taken on this date</th>
+        <th></th>
+    </tr>
+    {% for session in sessions_list %}
+        <tr>
+            <td>
+                <div class="form-inline" style="margin-top: 8px;">
+                    <p>{{ session.date }}</p>
+                </div>
+            </td>
+            <td>
+                <div style="margin-top: 8px; text-align:center;">
+                    <b style="padding:6px;border: solid  #3333ff 1px; border-radius: 5px; "> {{ session.number_eval }} </b>
+                </div>
+            </td>
+            <td style="text-align: center;">
+                <div class="btn-group" role="group">
+                    <a class="btn btn-primary btn-edit" href="{% url 'home' %}" alt="Edit session" style="margin-top: 3px;"><i class="fas fa-edit"></i>&emsp;Edit</a>
+                    <a class="btn btn-danger" href="{% url 'home' %}" alt="Delete session" style="margin-top: 3px;"><i class="fas fa-trash-alt"></i> Delete</a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% endif   %}
+
+    <br>
+    <table class="table">
+    <br><br>
+    <tr>
+        <th>Students</th>
+    </tr>
+    <tr>
+        <td>
+            <div class="form-inline" style="margin-top: 8px;">
+                {% for student in students_list %}
+                    <user>{{ student.firstname }} {{ student.name }}</user>
+                {% empty %}
+                <h6>No students</h6>
+                <br>
+                {% endfor %}
+            </div>
+        </td>
+    </tr>
+    </table>
+
+{% endblock %}

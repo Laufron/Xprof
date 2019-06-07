@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block welcome %}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'courses' %}">My courses</a></li>
+    <li class="breadcrumb-item active" aria-current="page">New course</li>
+{% endblock %}
+
+{% block content %}
+
+    <h2>{{ message }}</h2>
+
+    <form action="{% url "edit_course" course_slug %}" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" class="btn btn-success" value="Edit course !" />
+        <a class="btn btn-info" href="{% url "courses" %}"><i class="fas fa-undo-alt"></i> Back to your courses</a>
+    </form>
+
+{% endblock %}

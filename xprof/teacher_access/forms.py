@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from .widgets import FengyuanChenDatePickerInput
 
 
 class AuthForm(forms.Form):
@@ -11,6 +12,29 @@ class TeacherForm(forms.ModelForm):
     class Meta:
         model = Teacher
         fields = '__all__'
+
+
+class CourseForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        exclude = ('slug', )
+
+
+class SkillForm(forms.ModelForm):
+    class Meta:
+        model = Skill
+        fields = ('name', 'description')
+
+
+class SessionForm(forms.ModelForm):
+    class Meta:
+        model = Session
+        fields = ('date', )
+        widgets = {
+            'date': FengyuanChenDatePickerInput()
+        }
+
+#passer directement la liste des cours depuis la vue et utiliser 'initial={courses=courses}
 
 
 class EvaluationForm(forms.Form):

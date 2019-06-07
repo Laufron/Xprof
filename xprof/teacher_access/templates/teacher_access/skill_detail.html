@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block welcome %}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'courses' %}">My courses</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'course' course_slug %}">{{ course_name }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ skill_name }}</li>
+{% endblock %}
+
+
+{% block content %}
+
+    <h2> {{ course_name|title }}</h2>
+    <h3> {{ skill_name }}</h3>
+    <br>
+
+{% endblock %}

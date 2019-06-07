@@ -33,16 +33,16 @@ class StudentAdmin(admin.ModelAdmin):
 
 
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'course')
+    list_display = ('name', 'description', 'course', 'number_eval', 'slug')
     list_filter = ('course', )
-    ordering = ('name', 'course')
+    ordering = ('name', 'course', 'number_eval')
     search_fields = ('name', )
 
     fieldsets = (
         # Fieldset 1 : meta-info (titre, auteur…)
         ('General', {
             'classes': ['collapse', ],
-            'fields': ('name', 'course')
+            'fields': ('name', 'course', 'number_eval', 'slug')
         }),
         # Fieldset 2 : subsidiaires
         ('This skill evaluates : ', {
@@ -50,18 +50,20 @@ class SkillAdmin(admin.ModelAdmin):
         }),
     )
 
+    prepopulated_fields = {'slug': ('name',), }
+
 
 class SessionAdmin(admin.ModelAdmin):
-    list_display = ('date', 'course')
+    list_display = ('date', 'course', 'number_eval', 'slug')
     list_filter = ('course', )
     date_hierarchy = 'date'
-    ordering = ('date', 'course')
+    ordering = ('date', 'course', 'number_eval')
     search_fields = ('course', )
 
     fieldsets = (
         # Fieldset 1 : meta-info (titre, auteur…)
         ('General informations', {
-            'fields': ('date', 'course')
+            'fields': ('date', 'course', 'number_eval', 'slug')
         }),
     )
 

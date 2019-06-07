@@ -16,8 +16,10 @@ class Teacher(models.Model):
         verbose_name = "Teacher"
         ordering = ['name']
 
+#faire la meme classe avec 2 groupes
 
 class Student(models.Model):
+    #user = models.OnToOneField(User)
     firstname = models.CharField(max_length=100, default='')
     name = models.CharField(max_length=100, default='')
     login = models.CharField(max_length=100, default='', unique=True)
@@ -48,6 +50,8 @@ class Course(models.Model):
 class Session(models.Model):
     date = models.DateField()
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    number_eval = models.IntegerField(default=0, verbose_name="number of evaluations on this date")
+    slug = models.SlugField(max_length=100)
 
     def __str__(self):
         return self.course.name+" _ "+self.date.__str__()
@@ -61,6 +65,8 @@ class Skill(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(null=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name="evaluated in")
+    slug = models.SlugField(max_length=100)
+    number_eval = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
