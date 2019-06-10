@@ -6,7 +6,8 @@
 
 {% block breadcrumb_content %}
      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-     <li class="breadcrumb-item active" aria-current="page">Evaluate</li>
+    <li class="breadcrumb-item"><a href="{% url 'evaluate' %}">Evaluate</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ course_name }}</li>
 {% endblock %}
 
 {% block content %}

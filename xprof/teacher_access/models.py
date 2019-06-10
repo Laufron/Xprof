@@ -1,42 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 
-class Teacher(models.Model):
-    firstname = models.CharField(max_length=100, default='')
-    name = models.CharField(max_length=100, default='')
-    login = models.CharField(max_length=100, default='', unique=True)
-    password = models.CharField(max_length=50, default='')
-
-    def __str__(self):
-        return self.firstname+" "+self.name
-
-    class Meta:
-        verbose_name = "Teacher"
-        ordering = ['name']
-
-#faire la meme classe avec 2 groupes
-
-class Student(models.Model):
-    #user = models.OnToOneField(User)
-    firstname = models.CharField(max_length=100, default='')
-    name = models.CharField(max_length=100, default='')
-    login = models.CharField(max_length=100, default='', unique=True)
-    password = models.CharField(max_length=50, default='')
-
-    def __str__(self):
-        return self.firstname+" "+self.name
-
-    class Meta:
-        verbose_name = "Student"
-        ordering = ['name']
-
-
 class Course(models.Model):
     name = models.CharField(max_length=100, default='')
-    professors = models.ManyToManyField(Teacher, related_name='courses_given', blank=True)
-    students = models.ManyToManyField(Student, related_name='courses_followed', blank=True)
+    professors = models.ManyToManyField(User, related_name='courses_given', blank=True)
+    students = models.ManyToManyField(User, related_name='courses_followed', blank=True)
     slug = models.SlugField(max_length=100)
 
     def __str__(self):
@@ -78,10 +49,10 @@ class Skill(models.Model):
 
 class Evaluation(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
-    concerned = models.ForeignKey(Student, on_delete=models.CASCADE)
+    concerned = models.ForeignKey(User, on_delete=models.CASCADE, related_name="concerned")
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
     mark = models.IntegerField()
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name="evaluated by")
+    teacher = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="evaluated by", related_name="teacher")
     # Rajouter le champ commentaire
 
     def __str__(self):

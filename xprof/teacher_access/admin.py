@@ -4,34 +4,6 @@ from .models import *
 # Register your models here.
 
 
-class TeacherAdmin(admin.ModelAdmin):
-    list_display = ('name', 'firstname', 'login')
-    ordering = ('name', 'firstname')
-    search_fields = ('name', 'firstname')
-
-    fieldsets = (
-        # Fieldset 1 : meta-info (titre, auteur…)
-        ('Personal informations', {
-            'fields': ('firstname', 'name', 'login', 'password')
-        }),
-
-    )
-
-
-class StudentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'firstname', 'login')
-    ordering = ('name', 'firstname')
-    search_fields = ('name', 'firstname')
-
-    fieldsets = (
-        # Fieldset 1 : meta-info (titre, auteur…)
-        ('Personal informations', {
-            'fields': ('firstname', 'name', 'login', 'password')
-        }),
-
-    )
-
-
 class SkillAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'course', 'number_eval', 'slug')
     list_filter = ('course', )
@@ -70,7 +42,7 @@ class SessionAdmin(admin.ModelAdmin):
 
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
-    list_filter = ('professors',)
+    list_filter = ('professors', 'students')
     ordering = ('name', )
     search_fields = ('name', )
 
@@ -105,8 +77,6 @@ class EvaluationAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(Teacher, TeacherAdmin)
-admin.site.register(Student, StudentAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Session, SessionAdmin)
 admin.site.register(Course, CourseAdmin)

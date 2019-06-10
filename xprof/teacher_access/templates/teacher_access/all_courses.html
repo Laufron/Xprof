@@ -27,7 +27,7 @@
             <td>
                 <div class="form-inline" style="margin-top: 8px;">
                     {% for teacher in course.professors.all %}
-                        <user>{{ teacher.firstname }} {{ teacher.name }}</user>
+                        <user>{{ teacher.first_name }} {{ teacher.last_name }}</user>
                     {% endfor %}
                 </div>
             </td>
@@ -40,7 +40,6 @@
                 <div class="btn-group" role="group">
                     <a class="btn btn-primary btn-edit" href="{% url 'edit_course' course.slug %}" alt="Edit course" style="margin-top: 3px;"><i class="fas fa-edit"></i>&emsp;Edit</a>
                     <a class="btn btn-danger" href="{% url 'delete_course' course.slug %}" alt="Delete course" style="margin-top: 3px;"><i class="fas fa-trash-alt"></i> Delete</a>
-                    <div id="result"></div>
                 </div>
             </td>
 

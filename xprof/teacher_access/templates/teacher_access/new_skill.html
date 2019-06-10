@@ -18,7 +18,7 @@
     <form action="{% url "new_skill" course_slug %}" method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <input type="submit" class="btn btn-success" value="Start course !" />
+        <input type="submit" class="btn btn-success" value="Save skill" />
         <a class="btn btn-info" href="{% url "course" course_slug %}"><i class="fas fa-undo-alt"></i> Back to your course</a>
     </form>
 

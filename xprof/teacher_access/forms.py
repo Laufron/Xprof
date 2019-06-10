@@ -3,21 +3,22 @@ from .models import *
 from .widgets import FengyuanChenDatePickerInput
 
 
-class AuthForm(forms.Form):
-    login = forms.CharField(max_length=100, help_text="Enter your id")
-    password = forms.CharField(max_length=100, widget=forms.PasswordInput, help_text="Enter password")
-
-
-class TeacherForm(forms.ModelForm):
-    class Meta:
-        model = Teacher
-        fields = '__all__'
+class ConnexionForm(forms.Form):
+    username = forms.CharField(max_length=30, help_text="Enter your id")
+    password = forms.CharField(max_length=30, widget=forms.PasswordInput, help_text="Enter password")
 
 
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
-        exclude = ('slug', )
+        exclude = ('slug',)
+
+    def __init__(self, *args, **kwargs):
+        super(CourseForm, self).__init__(*args, **kwargs)
+        teachers = User.objects.filter(groups__name="teacher")
+        self.fields['professors'] = forms.ModelMultipleChoiceField(queryset=teachers)
+        students = User.objects.filter(groups__name="student")
+        self.fields['students'] = forms.ModelMultipleChoiceField(queryset=students)
 
 
 class SkillForm(forms.ModelForm):
@@ -29,38 +30,33 @@ class SkillForm(forms.ModelForm):
 class SessionForm(forms.ModelForm):
     class Meta:
         model = Session
-        fields = ('date', )
+        fields = ('date',)
         widgets = {
+
             'date': FengyuanChenDatePickerInput()
         }
 
-#passer directement la liste des cours depuis la vue et utiliser 'initial={courses=courses}
+    # passer directement la liste des cours depuis la vue et utiliser 'initial={courses=courses}
 
 
 class EvaluationForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
-        session = kwargs.pop("session")
-
+        courses = kwargs.pop("courses")
         super(EvaluationForm, self).__init__(*args, **kwargs)
 
-        teacher = Teacher.objects.get(firstname=session["firstname"], name=session["name"])
-        query = Course.objects.filter(professors__name__iexact=teacher.name,
-                                      professors__firstname__iexact=teacher.firstname)
-
-        self.fields['course'] = forms.ModelChoiceField(queryset=query)
+        self.fields['course'] = forms.ModelChoiceField(queryset=courses)
 
 
 class EvaluateCourseForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
-        course_slug = kwargs.pop("slug")
-        super(EvaluateCourseForm, self).__init__(*args, **kwargs)
 
-        course = Course.objects.get(slug__iexact=course_slug)
-        sessions = Session.objects.filter(course=course)
-        students = Student.objects.filter(courses_followed__exact=course)
-        skills = Skill.objects.filter(course__exact=course)
+        sessions = kwargs.pop("sessions")
+        students = kwargs.pop("students")
+        skills = kwargs.pop("skills")
+
+        super(EvaluateCourseForm, self).__init__(*args, **kwargs)
 
         self.fields['session'] = forms.ModelChoiceField(queryset=sessions)
         self.fields['concerned'] = forms.ModelChoiceField(queryset=students)
