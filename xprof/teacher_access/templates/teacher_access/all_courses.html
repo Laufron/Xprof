@@ -1,6 +1,28 @@
 {% extends "base.html" %}
 
-{% block welcome %}
+{% block nav %}
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">Home</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#dc3545;" href="{% url 'evaluate' %}">Evaluate</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'courses' %}">My courses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8000/admin/">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link logout" href="{% url 'logout' %}">Log out</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
+            </li>
+        </ul>
 {% endblock %}
 
 {% block breadcrumb_content %}
@@ -16,30 +38,22 @@
     {% if course_list|length != 0 %}
     <table class="table">
     <tr>
-        <th>My courses</th>
-        <th>Teachers</th>
-        <th style="text-align: center;">Number of students</th>
-        <th></th>
+        <th style="width:33%;">My courses</th>
+        <th style="text-align: center;width:33%;">Number of students</th>
+        <th style="width:33%;"></th>
     </tr>
     {% for course in course_list %}
         <tr>
             <td><a class="btn3" href="{% url 'course' course.slug %}">{{ course.name }}</a></td>
-            <td>
-                <div class="form-inline" style="margin-top: 8px;">
-                    {% for teacher in course.professors.all %}
-                        <user>{{ teacher.first_name }} {{ teacher.last_name }}</user>
-                    {% endfor %}
-                </div>
-            </td>
             <td style="text-align: center;">
                 <div style="margin-top: 10px;">
                     <b style="padding:6px;border: solid  #3333ff 1px; border-radius: 5px; "> {{ course.students.all|length }} </b>
                 </div>
             </td>
-            <td style="text-align: center;">
+            <td style="text-align: right;">
                 <div class="btn-group" role="group">
-                    <a class="btn btn-primary btn-edit" href="{% url 'edit_course' course.slug %}" alt="Edit course" style="margin-top: 3px;"><i class="fas fa-edit"></i>&emsp;Edit</a>
-                    <a class="btn btn-danger" href="{% url 'delete_course' course.slug %}" alt="Delete course" style="margin-top: 3px;"><i class="fas fa-trash-alt"></i> Delete</a>
+                    <a class="btn webkit btn-primary btn-edit" style="background-color: #00B7FF;" href="{% url 'edit_course' course.slug %}" alt="Edit course" style="margin-top: 3px;"><i class="fas fa-edit"></i>&emsp;Edit&emsp;</a>
+                    <a class="btn webkit btn-primary btn-edit" style="background-color: #dc3545;" href="{% url 'delete_course' course.slug %}" alt="Delete course" style="margin-top: 3px;"><i class="fas fa-trash-alt"></i>&emsp;Delete</a>
                 </div>
             </td>
 

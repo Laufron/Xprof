@@ -24,7 +24,7 @@ class CourseForm(forms.ModelForm):
 class SkillForm(forms.ModelForm):
     class Meta:
         model = Skill
-        fields = ('name', 'description')
+        fields = ('name', 'insufficient', 'weak', 'aimed_at', 'beyond')
 
 
 class SessionForm(forms.ModelForm):
@@ -62,11 +62,3 @@ class EvaluateCourseForm(forms.Form):
         self.fields['concerned'] = forms.ModelChoiceField(queryset=students)
         self.fields['skill'] = forms.ModelChoiceField(queryset=skills)
         self.fields['mark'] = forms.IntegerField()
-
-    def clean_mark(self):
-        mark = self.cleaned_data['mark']
-
-        if mark < 0 or mark > 10:
-            raise forms.ValidationError("La note doit être compris entre 0 et 10")
-
-        return mark

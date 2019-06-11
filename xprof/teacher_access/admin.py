@@ -5,7 +5,7 @@ from .models import *
 
 
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'course', 'number_eval', 'slug')
+    list_display = ('name', 'insufficient', 'weak', 'aimed_at', 'beyond', 'course', 'number_eval', 'slug')
     list_filter = ('course', )
     ordering = ('name', 'course', 'number_eval')
     search_fields = ('name', )
@@ -18,7 +18,7 @@ class SkillAdmin(admin.ModelAdmin):
         }),
         # Fieldset 2 : subsidiaires
         ('This skill evaluates : ', {
-            'fields': ('description', )
+            'fields': ('insufficient', 'weak', 'aimed_at', 'beyond')
         }),
     )
 
@@ -61,25 +61,42 @@ class CourseAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',), }
 
 
-class EvaluationAdmin(admin.ModelAdmin):
-    list_display = ('concerned', 'skill', 'mark', 'session', 'teacher')
-    list_filter = ('skill', 'session', 'teacher')
-    ordering = ('concerned', 'skill', 'mark', 'session')
-    search_fields = ('concerned', )
+class SKillEvalAdmin(admin.ModelAdmin):
+    list_display = ('skill', 'level', 'eval', 'comment')
+    list_filter = ('skill',)
+    ordering = ('level', 'skill')
+    search_fields = ('skill', )
 
     fieldsets = (
         # Fieldset 1 : meta-info (titre, auteur…)
         ("Contenu de l'évaluation", {
             'classes': ["collapse", ],
-            'fields': ('skill', 'session', 'concerned', 'mark', 'teacher')
+            'fields': ('skill', 'level', 'eval', 'comment')
         }),
 
+    )
+
+
+class EvaluationAdmin(admin.ModelAdmin):
+    list_display = ('session', 'concerned', 'general', 'teacher')
+    list_filter = ('concerned', 'teacher')
+    ordering = ('concerned', )
+    search_fields = ('concerned', 'teacher')
+
+    fieldsets = (
+        # Fieldset 1 : meta-info (titre, auteur…)
+        ("Contenu de l'évaluation", {
+            'classes': ["collapse", ],
+            'fields': ('session', 'concerned', 'general', 'teacher')
+        }),
     )
 
 
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Session, SessionAdmin)
 admin.site.register(Course, CourseAdmin)
+admin.site.register(SkillEvaluation, SKillEvalAdmin)
 admin.site.register(Evaluation, EvaluationAdmin)
+
 
 

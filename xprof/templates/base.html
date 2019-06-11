@@ -23,36 +23,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="{% static '../static/css/style.css' %}" />
+
+
+    <link rel="stylesheet" href="{% static '../static/css/style-xprof.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 <body>
-<h id="app_title">X-Prof</h>
-{% block logout %}
-<a class="btn2" href="{% url "logout" %}" style="float:right;background-color:#dc3545;"><i class="fas fa-sign-out-alt"></i> Log out</a>
-{% endblock %}
-<a class="btn2" href="http://localhost:8000/admin/" title="Manage your database" style="float:right;margin-right:5px;"><i class="fas fa-user-cog"></i> Admin</a>
-<hr>
-
+<br>
 {% block menu %}
 
-    {% block welcome %}
-
-<p class="subtitle">Welcome {{ user.get_full_name }}</p> <br>
-
-    {% endblock %}
-
-<div class="collapse-block">
-    <button class="btn-lg btn-secondary" data-toggle="collapse" data-target="#collapseMenu" aria-expanded="true" aria-controls="collapseMenu">
-        Menu&emsp;<i class="fas fa-caret-down"></i>
+<nav class="navbar fixed-top navbar-dark bg-dark">
+    <p  style="margin:0px 0px;" class="navbar-brand" href="#">xProf</p>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+        <span class="navbar-toggler-icon"></span>
     </button>
-    <div id="collapseMenu" class="collapse collapse-menu-bg" aria-labelledby="Menu">
-         <a class="btn2" href="{% url 'evaluate' %}"><i class="fas fa-edit"></i> Evaluate</a>
-         <a class="btn2" href="{% url 'courses' %}"><i class="fas fa-book-open"></i> My courses</a>
-
+    <div class="navbar-collapse collapse" id="collapsingNavbar">
+        {% block nav %}
+        {% endblock %}
     </div>
-</div>
+</nav>
+{% endblock %}
 
+<br><br><br>
+
+{% block welcome %}
+        <p class="subtitle" style="font-size:12px;margin:1px 0px 0px 0px;color:black;font-weight:300;">welcome {{ user.get_full_name }}</p> <br>
 {% endblock %}
 
 {% block breadcrumb %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import int_list_validator
 
 # Create your models here.
 
@@ -34,10 +35,13 @@ class Session(models.Model):
 
 class Skill(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField(null=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name="evaluated in")
     slug = models.SlugField(max_length=100)
     number_eval = models.IntegerField(default=0)
+    insufficient = models.CharField(max_length=300)
+    weak = models.CharField(max_length=300)
+    aimed_at = models.CharField(max_length=300)
+    beyond = models.CharField(max_length=300)
 
     def __str__(self):
         return self.name
@@ -50,16 +54,29 @@ class Skill(models.Model):
 class Evaluation(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
     concerned = models.ForeignKey(User, on_delete=models.CASCADE, related_name="concerned")
-    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
-    mark = models.IntegerField()
+    general = models.CharField(max_length=250)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="evaluated by", related_name="teacher")
-    # Rajouter le champ commentaire
 
     def __str__(self):
-        return self.session.course.name+"_"+self.skill.name+"_"+self.session.date.__str__()
+        return self.session.course.name+"_"+self.session.date.__str__()
 
     class Meta:
         verbose_name = "evaluation"
+        ordering = ['session__date']
+
+
+class SkillEvaluation(models.Model):
+    comment = models.CharField(max_length=150)
+    skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
+    level = models.IntegerField(default=0)
+    eval = models.ForeignKey(Evaluation, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.skill.name+"_eval"
+
+    class Meta:
+        verbose_name = "skill evaluation"
         ordering = ['skill']
+
 
 

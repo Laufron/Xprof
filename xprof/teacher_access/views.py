@@ -36,8 +36,7 @@ def log_page(request):
             if user.groups.filter(name="teacher").exists():
                 login(request, user)
                 return redirect('home')
-        else:
-            auth_message = "Invalid credential, only accessible to teachers"
+        auth_message = "Invalid credential, only accessible to teachers"
 
     return render(request, 'teacher_access/auth_page.html', locals())
 
@@ -174,7 +173,10 @@ def skill_detail(request, course_slug, skill_slug):
         "course_slug": course_slug,
         "skill_name": skill.name,
         "skill_slug": skill_slug,
-        "description": skill.description
+        "insufficient": skill.insufficient,
+        "weak": skill.weak,
+        "aimed_at": skill.aimed_at,
+        "beyond": skill.beyond,
     })
 
 
