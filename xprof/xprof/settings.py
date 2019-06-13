@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'teacher_access.apps.TeacherAccessConfig',
-    'crispy_forms'
+    'crispy_forms',
+    'jquery'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

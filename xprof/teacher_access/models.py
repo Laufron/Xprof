@@ -54,7 +54,7 @@ class Skill(models.Model):
 class Evaluation(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
     concerned = models.ForeignKey(User, on_delete=models.CASCADE, related_name="concerned")
-    general = models.CharField(max_length=250)
+    general = models.CharField(max_length=400, blank=True, null=True)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="evaluated by", related_name="teacher")
 
     def __str__(self):
@@ -66,7 +66,7 @@ class Evaluation(models.Model):
 
 
 class SkillEvaluation(models.Model):
-    comment = models.CharField(max_length=150)
+    comment = models.CharField(max_length=300)
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
     level = models.IntegerField(default=0)
     eval = models.ForeignKey(Evaluation, on_delete=models.CASCADE)

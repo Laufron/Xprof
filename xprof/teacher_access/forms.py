@@ -3,6 +3,13 @@ from .models import *
 from .widgets import FengyuanChenDatePickerInput
 
 
+def get_full_name(self):
+    return self.first_name + ' ' + self.last_name
+
+
+User.add_to_class("__str__", get_full_name)
+
+
 class ConnexionForm(forms.Form):
     username = forms.CharField(max_length=30, help_text="Enter your id")
     password = forms.CharField(max_length=30, widget=forms.PasswordInput, help_text="Enter password")
@@ -51,14 +58,15 @@ class EvaluationForm(forms.Form):
 class EvaluateCourseForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
-
         sessions = kwargs.pop("sessions")
         students = kwargs.pop("students")
         skills = kwargs.pop("skills")
 
         super(EvaluateCourseForm, self).__init__(*args, **kwargs)
 
-        self.fields['session'] = forms.ModelChoiceField(queryset=sessions)
-        self.fields['concerned'] = forms.ModelChoiceField(queryset=students)
-        self.fields['skill'] = forms.ModelChoiceField(queryset=skills)
-        self.fields['mark'] = forms.IntegerField()
+        self.fields['session'] = forms.ModelChoiceField(queryset=sessions,
+                                                        widget=forms.Select(attrs={'class': 'form-control'}))
+        self.fields['concerned'] = forms.ModelChoiceField(queryset=students,
+                                                          widget=forms.Select(attrs={'class': 'form-control'}))
+        self.fields['general'] = forms.CharField(required=False, max_length=400, label="General comment on the session",
+                                                 widget=forms.TextInput(attrs={'class': 'form-control'}))

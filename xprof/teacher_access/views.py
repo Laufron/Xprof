@@ -3,7 +3,6 @@ from django.utils.text import slugify
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 
-
 from .forms import *
 from .models import *
 
@@ -12,7 +11,6 @@ from .models import *
 
 
 def check_log(request):
-
     if (not request.user.is_authenticated
             or request.path == '/teacher/auth'
             or request.path == '/admin'
@@ -61,7 +59,6 @@ def evaluate(request):
 
 
 def evaluate_course(request, course_slug):
-
     course = Course.objects.get(slug=course_slug)
     course_name = course.name
 
@@ -71,17 +68,31 @@ def evaluate_course(request, course_slug):
 
     form = EvaluateCourseForm(request.POST or None, sessions=sessions, students=students, skills=skills)
     if form.is_valid():
+
         session = form.cleaned_data['session']
         concerned = form.cleaned_data['concerned']
-        skill = form.cleaned_data['skill']
-        mark = form.cleaned_data['mark']
+        general = form.cleaned_data['general']
 
-        skill.number_eval += 1
-        skill.save()
         session.number_eval += 1
         session.save()
 
-        Evaluation.objects.create(session=session, concerned=concerned, skill=skill, mark=mark, teacher=request.user)
+        evaluation = Evaluation.objects.create(session=session,
+                                               concerned=concerned,
+                                               general=general,
+                                               teacher=request.user
+                                               )
+
+        names_comment = ["comment_"+str(skill.id) for skill in skills]
+        comments = [request.POST.get(name) for name in names_comment]
+        names_level = ["level_" + str(skill.id) for skill in skills]
+        levels = [request.POST.get(name) for name in names_level]
+        print(levels)
+
+        for i in range(len(skills)):
+            if levels[i] != '5':
+                skills[i].number_eval += 1
+                skills[i].save()
+                SkillEvaluation.objects.create(comment=comments[i], skill=skills[i], level=levels[i], eval=evaluation)
 
         return redirect('home')
 
@@ -134,6 +145,8 @@ def edit_course(request, course_slug):
     course = Course.objects.get(slug=course_slug)
     form = CourseForm(request.POST or None, instance=course)
     if form.is_valid():
+        course = form.save(commit=False)
+        course.slug = slugify(course.name)
         form.save()
         return redirect('courses')
 
@@ -214,7 +227,8 @@ def edit_skill(request, course_slug, skill_slug):
 
     form = SkillForm(request.POST or None, instance=skill)
     if form.is_valid():
-        form.save()
+        skill = form.save(commit=False)
+        skill.slug = slugify(skill.name)
         return redirect('course', course_slug=course_slug)
 
     return render(request, "teacher_access/edit_skill.html", locals())

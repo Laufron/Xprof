@@ -38,10 +38,123 @@
    <br>
    <form action="{% url 'evaluate_course' course_slug %}" method="post">
         {% csrf_token %}
-        {{ form|crispy }}
-       <div style="text-align: center;">
-           <input type="submit" class="btn btn-success" value="Save evaluation" />
-       </div>
+        {{ form.non_field_errors }}
+        {{ form.source.errors }}
+        {{ form.source}}
+
+        <div class="form-group">
+                {{ form.session.erros }}
+                    <label>{{ form.session.label_tag }}</label>
+                {{ form.session }}
+        </div>
+
+        <div class="form-group">
+            {{ form.concerned.errors }}
+            <label>{{ form.concerned.label_tag }}</label>
+            {{ form.concerned }}
+        </div>
+
+        <div class="form-group">
+            {{ form.general.errors }}
+            <label>{{ form.general.label_tag }}</label>
+            {{ form.general }}
+        </div>
+
+       <div class="accordion" id="accordionExample">
+
+        {% for skill in skills %}
+
+             <div class="card">
+                <div class="card-header collapsed" data-toggle="collapse" id="heading{{ skill.id }}">
+                    <h5 class="mb-0">
+             <button class="btn btn-link btn-left" type="button" data-toggle="collapse" data-target="#collapse{{ skill.id }}" aria-expanded="false" aria-controls="collapse{{ skill.id }}">
+                <i class="fa fa-play"></i> {{ skill.name }} <i id="arrow{{ skill.id }}" class="fa"></i>
+             </button>
+             </h5>
+                </div>
+
+                <div id="collapse{{ skill.id }}" class="collapse" aria-labelledby="heading{{ skill.id }}" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <p class="text-right">
+                                    <input  value='Insufficient' type="button" onclick="$('#select{{ skill.id }}').val('1')" class="btn btn-danger btn-width">Insufficient</input>
+                                </p>
+                            </div>
+                            <div class="col-9">
+                                <p class="lo-comment" style="margin-left: 40px;">
+                                    {{ skill.insufficient }}</p>
+                            </div>
+                            <div class="col-3">
+                                <p class="text-right">
+                                    <button  type="button" class="btn btn-warning btn-width">Weak</button>
+                                </p>
+                            </div>
+                            <div class="col-9">
+                                <p class="lo-comment" style="margin-left: 40px;">
+                                   {{ skill.weak }}</p>
+                            </div>
+                            <div class="col-3">
+                                <p class="text-right">
+                                    <button  type="button" class="btn btn-success btn-width">Aimed at</button>
+                                </p>
+                            </div>
+                            <div class="col-9">
+                                <p class="lo-comment" style="margin-left: 40px;">
+                                    {{ skill.aimed_at }}</p>
+                            </div>
+                            <div class="col-3">
+                                <p class="text-right">
+                                    <button  type="button" class="btn btn-info btn-width">Beyond</button>
+                                </p>
+                            </div>
+                            <div class="col-9">
+                                <p class="lo-comment" style="margin-left: 40px;">
+                                    {{ skill.beyond }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Comment on this specific skill</label>
+                                    <input type="text" class="form-control" maxlength="400" name="comment_{{ skill.id }}">*
+                                    <select id=select{{ skill_id }}" class="form-control graybutton" onchange="this.classList.remove(this.classList.item(1));
+                                                                                      this.classList.add(this.options[this.selectedIndex].classList.item(0));
+                                                                                      if(this.options[this.selectedIndex].classList.item(1)!=='notselected'){
+                                                                                           document.getElementById('arrow{{ skill.id }}').classList.remove( document.getElementById('arrow{{ skill.id }}').classList.item(1));
+                                                                                           document.getElementById('arrow{{ skill.id }}').classList.remove( document.getElementById('arrow{{ skill.id }}').classList.item(2));
+                                                                                           document.getElementById('arrow{{ skill.id }}').classList.remove( document.getElementById('arrow{{ skill.id }}').classList.item(3));
+                                                                                           document.getElementById('arrow{{ skill.id }}').classList.add('fa-check', 'big', this.options[this.selectedIndex].classList.item(1));
+                                                                                      }
+                                                                                      else{
+                                                                                          document.getElementById('arrow{{ skill.id }}').classList.remove( document.getElementById('arrow{{ skill.id }}').classList.item(1));
+                                                                                          document.getElementById('arrow{{ skill.id }}').classList.remove( document.getElementById('arrow{{ skill.id }}').classList.item(2));
+                                                                                          document.getElementById('arrow{{ skill.id }}').classList.remove( document.getElementById('arrow{{ skill.id }}').classList.item(3));
+                                                                                      }
+                                                                                     "
+
+                                            name="level_{{ skill.id }}">
+                                        <option  class="graybutton notselected" value="5" selected>Don't evaluate</option>
+                                        <option  class="redbutton insufisant" value="1">Insufficient</option>
+                                        <option class="yellowbutton faible" value="2">Weak</option>
+                                        <option class="greenbutton vise" value="3">Aimed at</option>
+                                        <option class="bluebutton audela" value="4">Beyond</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+
+        {% endfor %}
+
+        </div>
+        <br>
+         <div style="text-align: center;">
+             <input type="submit" class="btn btn-success" value="Save evaluation" />
+         </div>
+
    </form>
 
 {% endblock %}
