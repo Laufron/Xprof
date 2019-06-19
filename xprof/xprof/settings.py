@@ -142,4 +142,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-STATIC_ROOT = "/var/www/xprof/static/"
+#STATIC_ROOT = "/var/www/xprof/static/"
