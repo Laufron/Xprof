@@ -78,7 +78,7 @@
                         <div class="row">
                             <div class="col-3">
                                 <p class="text-right">
-                                    <input  value='Insufficient' type="button" onclick="$('#select{{ skill.id }}').val('1')" class="btn btn-danger btn-width">Insufficient</input>
+                                    <input id="choose_ins_{{ skill.id }}" value='Insufficient' type="button" class="btn btn-danger btn-width">
                                 </p>
                             </div>
                             <div class="col-9">
@@ -87,7 +87,7 @@
                             </div>
                             <div class="col-3">
                                 <p class="text-right">
-                                    <button  type="button" class="btn btn-warning btn-width">Weak</button>
+                                    <input   id="choose_wea_{{ skill.id }}" value="Weak" type="button" class="btn btn-warning btn-width">
                                 </p>
                             </div>
                             <div class="col-9">
@@ -96,7 +96,7 @@
                             </div>
                             <div class="col-3">
                                 <p class="text-right">
-                                    <button  type="button" class="btn btn-success btn-width">Aimed at</button>
+                                    <input  id="choose_aim_{{ skill.id }}" value="Aimed at" type="button" class="btn btn-success btn-width">
                                 </p>
                             </div>
                             <div class="col-9">
@@ -105,7 +105,7 @@
                             </div>
                             <div class="col-3">
                                 <p class="text-right">
-                                    <button  type="button" class="btn btn-info btn-width">Beyond</button>
+                                    <input  id="choose_bey_{{ skill.id }}" value="Beyond" type="button" class="btn btn-info btn-width">
                                 </p>
                             </div>
                             <div class="col-9">
@@ -117,28 +117,13 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Comment on this specific skill</label>
-                                    <input type="text" class="form-control" maxlength="400" name="comment_{{ skill.id }}">*
-                                    <select id=select{{ skill_id }}" class="form-control graybutton" onchange="this.classList.remove(this.classList.item(1));
-                                                                                      this.classList.add(this.options[this.selectedIndex].classList.item(0));
-                                                                                      if(this.options[this.selectedIndex].classList.item(1)!=='notselected'){
-                                                                                           document.getElementById('arrow{{ skill.id }}').classList.remove( document.getElementById('arrow{{ skill.id }}').classList.item(1));
-                                                                                           document.getElementById('arrow{{ skill.id }}').classList.remove( document.getElementById('arrow{{ skill.id }}').classList.item(2));
-                                                                                           document.getElementById('arrow{{ skill.id }}').classList.remove( document.getElementById('arrow{{ skill.id }}').classList.item(3));
-                                                                                           document.getElementById('arrow{{ skill.id }}').classList.add('fa-check', 'big', this.options[this.selectedIndex].classList.item(1));
-                                                                                      }
-                                                                                      else{
-                                                                                          document.getElementById('arrow{{ skill.id }}').classList.remove( document.getElementById('arrow{{ skill.id }}').classList.item(1));
-                                                                                          document.getElementById('arrow{{ skill.id }}').classList.remove( document.getElementById('arrow{{ skill.id }}').classList.item(2));
-                                                                                          document.getElementById('arrow{{ skill.id }}').classList.remove( document.getElementById('arrow{{ skill.id }}').classList.item(3));
-                                                                                      }
-                                                                                     "
-
-                                            name="level_{{ skill.id }}">
-                                        <option  class="graybutton notselected" value="5" selected>Don't evaluate</option>
-                                        <option  class="redbutton insufisant" value="1">Insufficient</option>
-                                        <option class="yellowbutton faible" value="2">Weak</option>
-                                        <option class="greenbutton vise" value="3">Aimed at</option>
-                                        <option class="bluebutton audela" value="4">Beyond</option>
+                                    <input type="text" class="form-control" maxlength="400" name="comment_{{ skill.id }}">
+                                    <select hidden id="select{{ skill.id }}" class="form-control graybutton" name="level_{{ skill.id }}">
+                                        <option  id='test{{ skill.id }}' class="graybutton notselected" value=5 selected>Don't evaluate</option>
+                                        <option  class="redbutton insufisant" value=1>Insufficient</option>
+                                        <option class="yellowbutton faible" value=2>Weak</option>
+                                        <option class="greenbutton vise" value=3>Aimed at</option>
+                                        <option class="bluebutton audela" value=4>Beyond</option>
                                     </select>
                                 </div>
                             </div>
@@ -156,5 +141,45 @@
          </div>
 
    </form>
+
+    <script>
+        $(document).ready(function(){
+            $('input[id^="choose_"]').click(function () {
+                 let id=this.id.slice(11);
+                 let value=this.id.slice(7,10);
+
+                 if(value==='ins'){
+                     $("#select"+id).val(1);
+                     document.getElementById('arrow'+id).classList.remove( document.getElementById('arrow'+id).classList.item(1));
+                     document.getElementById('arrow'+id).classList.remove( document.getElementById('arrow'+id).classList.item(2));
+                     document.getElementById('arrow'+id).classList.remove( document.getElementById('arrow'+id).classList.item(3));
+                     document.getElementById('arrow'+id).classList.add('fa-check', 'big', 'insufisant');
+                 }
+
+                 if(value==='wea'){
+                     $("#select"+id).val(2)
+                     document.getElementById('arrow'+id).classList.remove( document.getElementById('arrow'+id).classList.item(1));
+                     document.getElementById('arrow'+id).classList.remove( document.getElementById('arrow'+id).classList.item(2));
+                     document.getElementById('arrow'+id).classList.remove( document.getElementById('arrow'+id).classList.item(3));
+                     document.getElementById('arrow'+id).classList.add('fa-check', 'big', 'faible');
+                 }
+                 if(value==='aim'){
+                     $("#select"+id).val(3)
+                     document.getElementById('arrow'+id).classList.remove( document.getElementById('arrow'+id).classList.item(1));
+                     document.getElementById('arrow'+id).classList.remove( document.getElementById('arrow'+id).classList.item(2));
+                     document.getElementById('arrow'+id).classList.remove( document.getElementById('arrow'+id).classList.item(3));
+                     document.getElementById('arrow'+id).classList.add('fa-check', 'big', 'vise');
+                 }
+                 if(value==='bey'){
+                     $("#select"+id).val(4)
+                     document.getElementById('arrow'+id).classList.remove( document.getElementById('arrow'+id).classList.item(1));
+                     document.getElementById('arrow'+id).classList.remove( document.getElementById('arrow'+id).classList.item(2));
+                     document.getElementById('arrow'+id).classList.remove( document.getElementById('arrow'+id).classList.item(3));
+                     document.getElementById('arrow'+id).classList.add('fa-check', 'big', 'audela');
+                 }
+
+            });
+        });
+    </script>
 
 {% endblock %}
