@@ -13,7 +13,7 @@
                 <a class="nav-link" href="{% url 'courses' %}">My courses</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8000/admin/">Admin</a>
+                <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link logout" href="{% url 'logout' %}">Log out</a>
@@ -39,8 +39,8 @@
     <form action="{% url "new_course" %}" method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <input type="submit" class="btn btn-success" value="Start course !" />
-        <a class="btn btn-info" href="{% url "courses" %}"><i class="fas fa-undo-alt"></i> Back to your courses</a>
+        <input style="margin:5px;" type="submit" class="btn btn-success" value="Start course !" />
+        <a style="margin:5px;" class="btn btn-info" href="{% url "courses" %}"><i class="fas fa-undo-alt"></i> Back to your courses</a>
     </form>
 
 {% endblock %}

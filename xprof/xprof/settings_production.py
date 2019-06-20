@@ -24,7 +24,7 @@ SECRET_KEY = 'o7#hob8vd1_jux9c!cc#s()dp33@jv2j9kj%mw10n70b=t%jzl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['xprof.isae.fr']
 
 # Application definition
 
@@ -86,13 +86,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'xprof',
-        'USER': 'vlauferon',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '5432',
+        'USER': 'xprof',
+        'PASSWORD': 'xprof',
+        'HOST': 'idea-db',
+        'PORT': '5433',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -109,12 +108,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr-fr'
 
-TIME_ZONE = 'Africa/Ceuta'
+TIME_ZONE = 'Europe/Paris'
 
 USE_I18N = True
 
@@ -130,3 +130,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+STATIC_ROOT = '/var/www/xprof/static/'

@@ -10,16 +10,6 @@ from .models import *
 # Create your views here.
 
 
-def check_log(request):
-    if (not request.user.is_authenticated
-            or request.path == '/teacher/auth'
-            or request.path == '/admin'
-            or request.path == '/teacher/register'):
-        return redirect('authentication')
-    else:
-        return redirect('home')
-
-
 def log_page(request):
     auth_message = ""
 
@@ -86,9 +76,8 @@ def evaluate_course(request, course_slug):
         comments = [request.POST.get(name) for name in names_comment]
         names_level = ["level_" + str(skill.id) for skill in skills]
         levels = [request.POST.get(name) for name in names_level]
-
         for i in range(len(skills)):
-            if levels[i] != 5:
+            if not levels[i] == '5':
                 skills[i].number_eval += 1
                 skills[i].save()
                 SkillEvaluation.objects.create(comment=comments[i], skill=skills[i], level=levels[i], eval=evaluation)

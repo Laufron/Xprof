@@ -1,0 +1,6 @@
+Django>=2.2,<2.3
+django-crispy-forms
+django-debug-toolbar
+psycopg2-binary
+gunicorn
+django_lti_auth

@@ -1,5 +1,5 @@
 body {
-    padding:7px;
+    padding:5px;
     font: 12px 'Roboto', Georgia, Times, serif;
     background-color: white;
 }
@@ -11,6 +11,10 @@ h1, h2, h3, h4, h5 {
 
 label{
     font-size: 11px;
+}
+
+input {
+    font-size:10px;
 }
 
 .logout:hover {
@@ -166,13 +170,13 @@ tr:hover{
 }
 
 th{
-    font-size:13px;
+    font-size:12px;
     color: white;
     background-color: #487894;
 }
 
 td{
-    font-size:12px;
+    font-size:10px;
     vertical-align: center;
 }
 

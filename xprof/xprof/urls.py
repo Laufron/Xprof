@@ -25,7 +25,6 @@ from teacher_access.views import check_log
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('teacher/', include('teacher_access.urls')),
-    re_path(r'^', check_log)
 
 ]
 

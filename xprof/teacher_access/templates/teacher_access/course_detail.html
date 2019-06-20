@@ -13,7 +13,7 @@
                 <a class="nav-link" href="{% url 'courses' %}">My courses</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8000/admin/">Admin</a>
+                <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link logout" href="{% url 'logout' %}">Log out</a>
@@ -52,10 +52,10 @@
     </tr>
     {% for skill in skills_list %}
         <tr>
-            <td><a class="btn3" href="{% url 'skill' course_slug skill.slug %}">{{ skill.name }}</a></td>
+            <td><a style="text-align:center;" class="btn3" href="{% url 'skill' course_slug skill.slug %}">{{ skill.name|truncatechars:40 }}</a></td>
             <td>
                 <div style="margin-top: 20px; text-align:center;">
-                    <b style="padding:6px;border: solid  #3333ff 1px; border-radius: 5px; "> {{ skill.number_eval }} </b>
+                    <b style="padding:6px;border: solid  #3333ff 1px; border-radius: 5px; ">{{ skill.number_eval }}</b>
                 </div>
             </td>
             <td style="text-align: right;">
