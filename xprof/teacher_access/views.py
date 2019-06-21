@@ -2,12 +2,29 @@ from django.shortcuts import redirect, render
 from django.utils.text import slugify
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
+import datetime
 
 from .forms import *
 from .models import *
 
 
 # Create your views here.
+
+def valid_lti_request(user_payload, request):
+    request.session['last_name'] = user_payload['lis_person_name_family']
+    request.session['first_name'] = user_payload['lis_person_name_given']
+    request.session['username'] = user_payload['ext_user_username']
+    request.session['email'] = user_payload['lis_person_contact_email_primary']
+    request.session['roles'] = user_payload['roles']
+    request.session['module'] = user_payload['context_title']
+    request.session['course'] = user_payload['resource_link_title']
+
+    url = reverse('home')
+    return url
+
+
+def invalid_lti_request(user_payload):
+    return
 
 
 def log_page(request):
@@ -35,6 +52,20 @@ def log_out(request):
 
 
 def home_page(request):
+    if not request.user.is_authenticated:
+        password = 'xrG%x:N6p.#r&9W9nvwv4smHh}dG:e4Hq:<&?Czx*We)6B!YSCGDBy6S_:)'
+        users = User.objects.filter(username=request.session['username'])
+        if not users.exists():
+            user = User.objects.create_user(username=request.session['username'], password=password,
+                                        first_name=request.session['first_name'],
+                                        last_name=request.session['last_name'], group='teacher')
+
+            user.save()
+        else:
+            user = users[0]
+
+        login(request, user)
+    
     return render(request, 'teacher_access/home.html', {})
 
 
@@ -52,19 +83,15 @@ def evaluate_course(request, course_slug):
     course = Course.objects.get(slug=course_slug)
     course_name = course.name
 
-    sessions = Session.objects.filter(course__exact=course)
     students = User.objects.filter(courses_followed__exact=course, groups__name="student")
     skills = Skill.objects.filter(course__exact=course)
 
-    form = EvaluateCourseForm(request.POST or None, sessions=sessions, students=students, skills=skills)
+    form = EvaluateCourseForm(request.POST or None, students=students)
     if form.is_valid():
 
-        session = form.cleaned_data['session']
+        session = Session.objects.create(course=course, date=datetime.datetime.now().date(), number_eval=1)
         concerned = form.cleaned_data['concerned']
         general = form.cleaned_data['general']
-
-        session.number_eval += 1
-        session.save()
 
         evaluation = Evaluation.objects.create(session=session,
                                                concerned=concerned,
@@ -72,7 +99,7 @@ def evaluate_course(request, course_slug):
                                                teacher=request.user
                                                )
 
-        names_comment = ["comment_"+str(skill.id) for skill in skills]
+        names_comment = ["comment_" + str(skill.id) for skill in skills]
         comments = [request.POST.get(name) for name in names_comment]
         names_level = ["level_" + str(skill.id) for skill in skills]
         levels = [request.POST.get(name) for name in names_level]

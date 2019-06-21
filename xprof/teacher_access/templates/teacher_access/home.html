@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% block nav %}
-         <ul class="navbar-nav">
+
+       <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link active" href="{% url 'home' %}">Home <span class="sr-only">Home</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color:#dc3545;" href="{% url 'evaluate' %}">Evaluate</a>
+                <a class="nav-link" style="color:#db565d;" href="{% url 'evaluate' %}">Evaluate</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'courses' %}">My courses</a>
@@ -23,7 +24,8 @@
                 <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
             </li>
         </ul>
-{% endblock %}
+
+        {% endblock %}
 
 {% block content %}
     <br>

@@ -58,14 +58,11 @@ class EvaluationForm(forms.Form):
 class EvaluateCourseForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
-        sessions = kwargs.pop("sessions")
         students = kwargs.pop("students")
-        skills = kwargs.pop("skills")
+        #skills = kwargs.pop("skills")
 
         super(EvaluateCourseForm, self).__init__(*args, **kwargs)
 
-        self.fields['session'] = forms.ModelChoiceField(queryset=sessions,
-                                                        widget=forms.Select(attrs={'class': 'form-control'}))
         self.fields['concerned'] = forms.ModelChoiceField(queryset=students,
                                                           widget=forms.Select(attrs={'class': 'form-control'}))
         self.fields['general'] = forms.CharField(required=False, max_length=400, label="General comment on the session",

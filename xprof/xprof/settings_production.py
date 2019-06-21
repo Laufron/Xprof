@@ -76,6 +76,24 @@ TEMPLATES = [
     },
 ]
 
+PYLTI_CONFIG = {
+                'consumers': {
+                    'consumerkey': {
+                        'secret': 'secret'
+                    }
+                },
+                "method_hooks": {
+                    "valid_lti_request": "teacher_access.views.valid_lti_request",
+                    "invalid_lti_request": "teacher_access.views.invalid_lti_request",
+                },
+                "next_url": "/",
+            }
+
+X_FRAME_OPTIONS = 'ALLOW-FROM http://xlms.isae.fr/'
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = True
+
 WSGI_APPLICATION = 'xprof.wsgi.application'
 
 # Database
