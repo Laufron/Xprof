@@ -3,6 +3,8 @@ from django.utils.text import slugify
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 import datetime
+from django.contrib.auth.models import Group
+import moodle_api
 
 from .forms import *
 from .models import *
@@ -56,16 +58,18 @@ def home_page(request):
         password = 'xrG%x:N6p.#r&9W9nvwv4smHh}dG:e4Hq:<&?Czx*We)6B!YSCGDBy6S_:)'
         users = User.objects.filter(username=request.session['username'])
         if not users.exists():
-            user = User.objects.create_user(username=request.session['username'], password=password,
-                                        first_name=request.session['first_name'],
-                                        last_name=request.session['last_name'], group='teacher')
 
+            user = User.objects.create_user(username=request.session['username'], password=password,
+                                            first_name=request.session['first_name'],
+                                            last_name=request.session['last_name'])
+            teacher_group = Group.objects.get(name='teacher')
+            user.groups.add(teacher_group)
             user.save()
         else:
             user = users[0]
 
         login(request, user)
-    
+
     return render(request, 'teacher_access/home.html', {})
 
 
@@ -244,6 +248,7 @@ def edit_skill(request, course_slug, skill_slug):
     if form.is_valid():
         skill = form.save(commit=False)
         skill.slug = slugify(skill.name)
+        skill.save()
         return redirect('course', course_slug=course_slug)
 
     return render(request, "teacher_access/edit_skill.html", locals())
