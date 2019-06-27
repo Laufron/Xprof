@@ -21,7 +21,7 @@ def valid_lti_request(user_payload, request):
     request.session['module'] = user_payload['context_title']
     request.session['course'] = user_payload['resource_link_title']
 
-    url = reverse('home')
+    url = reverse('lti_auth')
     return url
 
 
@@ -53,23 +53,31 @@ def log_out(request):
     return redirect(reverse('authentication'))
 
 
+def lti_auth(request):
+    password = 'xrG%x:N6p.#r&9W9nvwv4smHh}dG:e4Hq:<&?Czx*We)6B!YSCGDBy6S_:)'
+    users = User.objects.filter(username=request.session['username'])
+    if not users.exists():
+
+        user = User.objects.create_user(username=request.session['username'], password=password,
+                                        first_name=request.session['first_name'],
+                                        last_name=request.session['last_name'])
+        teacher_group = Group.objects.get(name='teacher')
+        user.groups.add(teacher_group)
+        user.save()
+    else:
+        user = users[0]
+
+    if request.user.is_authenticated:
+        logout(request)
+
+    login(request, user)
+
+    course = moodle_api.call()
+
+    return redirect('home')
+
+
 def home_page(request):
-    if not request.user.is_authenticated:
-        password = 'xrG%x:N6p.#r&9W9nvwv4smHh}dG:e4Hq:<&?Czx*We)6B!YSCGDBy6S_:)'
-        users = User.objects.filter(username=request.session['username'])
-        if not users.exists():
-
-            user = User.objects.create_user(username=request.session['username'], password=password,
-                                            first_name=request.session['first_name'],
-                                            last_name=request.session['last_name'])
-            teacher_group = Group.objects.get(name='teacher')
-            user.groups.add(teacher_group)
-            user.save()
-        else:
-            user = users[0]
-
-        login(request, user)
-
     return render(request, 'teacher_access/home.html', {})
 
 
